@@ -74,13 +74,19 @@ function love.update(dt)
 
     -- move the head
     if direction == 'up' then -- If the direction is up
-        snake[1].y = snake[1].y - SNAKE_SIZE -- Move the head up
+        snake[1].y = snake[1].y - SNAKE_SIZE --% VIR  Move the head up
+        if snake[1].y < 0 then -- If the head goes out of bounds
+            snake[1].y = VIRTUAL_HEIGHT - SNAKE_SIZE -- Wrap around to the bottom 
+        end
     elseif direction == 'down' then -- If the direction is down
-        snake[1].y = snake[1].y + SNAKE_SIZE -- Move the head down
+        snake[1].y = (snake[1].y + SNAKE_SIZE ) % VIRTUAL_HEIGHT-- Move the head down
     elseif direction == 'left' then -- If the direction is left
         snake[1].x = snake[1].x - SNAKE_SIZE -- Move the head left
+        if snake[1].x < 0 then -- If
+            snake[1].x = VIRTUAL_WIDTH - SNAKE_SIZE -- Wrap around to the right
+        end
     elseif direction == 'right' then -- If the direction is right
-        snake[1].x = snake[1].x + SNAKE_SIZE -- Move the head right
+        snake[1].x = (snake[1].x + SNAKE_SIZE ) % VIRTUAL_WIDTH -- Move the head right
     end
 end
 
